@@ -1,11 +1,14 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
+  IonItem,
   IonMenu,
   IonMenuButton,
+  IonNavLink,
   IonPage,
   IonRouterOutlet,
   IonTitle,
@@ -35,6 +38,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Ticket from './pages/ticket/Ticket';
 
 setupIonicReact();
 
@@ -48,7 +52,18 @@ const App: React.FC = () => (
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
-          This is the menu content.
+        <IonButton
+            expand="block"
+            routerLink="/home"
+          >
+            Home
+          </IonButton>
+        <IonButton
+            expand="block"
+            routerLink="/ticket"
+          >
+            Submit a ticket
+          </IonButton>
         </IonContent>
       </IonMenu>
 
@@ -65,6 +80,9 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route exact path="/home">
             <Home />
+          </Route>
+          <Route exact path="/ticket">
+            <Ticket/>
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
