@@ -1,6 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonAvatar,
   IonButton,
   IonButtons,
   IonContent,
@@ -8,6 +9,7 @@ import {
   IonItem,
   IonMenu,
   IonMenuButton,
+  IonMenuToggle,
   IonNavLink,
   IonPage,
   IonRouterOutlet,
@@ -17,6 +19,8 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/home/Home';
+import Ticket from './pages/ticket/Ticket';
+import FormApplication from './pages/form-application/FormApplication';
 
 import './index.css';
 
@@ -38,7 +42,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Ticket from './pages/ticket/Ticket';
 
 setupIonicReact();
 
@@ -52,42 +55,59 @@ const App: React.FC = () => (
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
-        <IonButton
-            expand="block"
-            routerLink="/home"
-          >
-            Home
-          </IonButton>
-        <IonButton
-            expand="block"
-            routerLink="/ticket"
-          >
-            Submit a ticket
-          </IonButton>
+          <IonMenuToggle autoHide={false}>
+            <IonButton
+              expand="block"
+              routerLink="/home"
+              size="small"
+              fill="clear"
+              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
+            >
+              Home
+            </IonButton>
+          </IonMenuToggle>
+          <IonMenuToggle autoHide={false}>
+            <IonButton
+              expand="block"
+              routerLink="/ticket"
+              size="small"
+              fill="clear"
+              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
+            >
+              Submit a ticket
+            </IonButton>
+          </IonMenuToggle>
+          <IonMenuToggle autoHide={false}>
+            <IonButton
+              expand="block"
+              routerLink="/forms"
+              size="small"
+              fill="clear"
+              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
+            >
+              Forms
+            </IonButton>
+          </IonMenuToggle>
         </IonContent>
       </IonMenu>
 
       <IonPage id="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle>Civic Hub — Brgy. Marites</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
-        <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/ticket">
-            <Ticket/>
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
+        <IonContent>
+          <IonRouterOutlet>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/ticket">
+              <Ticket />
+            </Route>
+            <Route exact path="/forms">
+              <FormApplication />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+          </IonRouterOutlet>
+        </IonContent>
       </IonPage>
     </IonReactRouter>
   </IonApp>
