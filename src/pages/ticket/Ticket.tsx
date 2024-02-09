@@ -3,7 +3,8 @@ import {
   IonPage,
   IonModal,
   IonButton,
-  IonBackButton
+  IonBackButton,
+  IonLoading
 } from '@ionic/react';
 import React, { useRef, useState } from 'react';
 import MainHeader from '../../components/MainHeader';
@@ -49,6 +50,16 @@ const Ticket: React.FC = () => {
   return (
     <IonPage>
       <MainHeader />
+
+      {loading && (
+        <IonLoading
+          isOpen={loading}
+          message={'Loading...'}
+          duration={3000}
+          spinner="circles"
+        />
+      )}
+
       <IonContent>
         <h4 className="text-center capitalize text-base mt-10">
           Submit a ticket
@@ -186,7 +197,7 @@ const Ticket: React.FC = () => {
           {response && (
             <IonModal ref={modal} isOpen={response}>
               <IonContent>
-                <div id="container">
+                <div className="flex flex-col min-h-full items-center justify-center">
                   <p className="text-gray-50">Ticket submitted successfully!</p>
                   <div className="w-full flex items-center justify-center self-center my-3">
                     <p className="text-gray-50 text-center block max-w-[300px]">

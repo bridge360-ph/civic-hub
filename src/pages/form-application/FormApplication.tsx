@@ -1,13 +1,227 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import MainHeader from '../../components/MainHeader';
-import { IonContent, IonPage } from '@ionic/react';
+import {
+  IonContent,
+  IonPage,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonButton,
+  IonInput,
+  IonText,
+  IonAlert,
+  IonModal,
+  IonBackButton,
+  IonLoading
+} from '@ionic/react';
+import './index.css';
 
 const FormApplication: React.FC = () => {
+  const [documentType, setDocumentType] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [applyingFor, setApplyingFor] = useState('');
+  const [relationship, setRelationship] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [response, setResponse] = useState(false);
+  const modal = useRef<HTMLIonModalElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!documentType || !applyingFor) {
+      setError(true);
+    }
+
+    try {
+      setLoading(true);
+
+      // Simulating form submission
+
+      setTimeout(() => {
+        setLoading(false);
+        setError(false);
+        setResponse(true);
+        setDocumentType('');
+        setMobileNumber('');
+        setName('');
+        setEmail('');
+        setApplyingFor('');
+        setRelationship('');
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <IonPage>
       <MainHeader />
       <IonContent>
-        <p>Hello World</p>
+        <h4 className="text-center capitalize text-base mt-10">
+          Application Form
+        </h4>
+
+        <IonAlert
+          header="Error"
+          isOpen={error}
+          message={'Please fill in all required fields'}
+          buttons={['Go back']}
+          onDidDismiss={() => setError(false)}
+        ></IonAlert>
+
+        {loading && (
+          <IonLoading
+            isOpen={loading}
+            message={'Loading...'}
+            duration={3000}
+            spinner="circles"
+          />
+        )}
+
+        <div className="flex flex-col items-center justify mt-14">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="w-full max-w-md"
+          >
+            <IonItem>
+              <IonLabel position="stacked">Document Type:</IonLabel>
+              <IonSelect
+                placeholder="Select Document Type"
+                value={documentType}
+                onIonChange={(e) => {
+                  setDocumentType(e.detail.value);
+                }}
+                interface="action-sheet"
+              >
+                <IonSelectOption value="residency_permit">
+                  Residency Permit
+                </IonSelectOption>
+                <IonSelectOption value="cedula">Cedula</IonSelectOption>
+                <IonSelectOption value="barangay_clearance">
+                  Barangay Clearance
+                </IonSelectOption>
+                <IonSelectOption>More soon..</IonSelectOption>
+                {/* Add more document options as needed */}
+              </IonSelect>
+            </IonItem>
+
+            <IonItem style={{ marginTop: '6px' }}>
+              <IonLabel position="stacked">Applying For:</IonLabel>
+              <IonSelect
+                placeholder="Select One"
+                value={applyingFor}
+                onIonChange={(e) => {
+                  setApplyingFor(e.detail.value);
+                }}
+                interface="action-sheet"
+              >
+                <IonSelectOption value="self">Self</IonSelectOption>
+                <IonSelectOption value="family-member">
+                  Family Member
+                </IonSelectOption>
+                {/* Add more document options as needed */}
+              </IonSelect>
+            </IonItem>
+
+            {applyingFor == 'family-member' && (
+              <>
+                <IonItem style={{ marginTop: '6px' }}>
+                  <IonLabel position="stacked">Full Name</IonLabel>
+                  <IonInput
+                    type="text"
+                    name="name"
+                    value={name}
+                    onIonChange={(e: CustomEvent) => setName(e.detail.value)}
+                  />
+                </IonItem>
+
+                <IonItem style={{ marginTop: '6px' }}>
+                  <IonLabel position="stacked">Relationship</IonLabel>
+                  <IonInput
+                    type="text"
+                    value={relationship}
+                    onIonChange={(e: CustomEvent) =>
+                      setRelationship(e.detail.value)
+                    }
+                  />
+                </IonItem>
+
+                <IonItem style={{ marginTop: '6px' }}>
+                  <IonLabel position="stacked">
+                    Email <IonText>(Optional)</IonText>
+                  </IonLabel>
+                  <IonInput
+                    type="text"
+                    value={email}
+                    onIonChange={(e: CustomEvent) => setEmail(e.detail.value)}
+                  />
+                </IonItem>
+
+                <IonItem style={{ marginTop: '6px' }}>
+                  <IonLabel position="stacked">Mobile Number</IonLabel>
+                  <IonInput
+                    type="tel"
+                    name="mobile"
+                    value={mobileNumber}
+                    onIonChange={(e: CustomEvent) =>
+                      setMobileNumber(e.detail.value)
+                    }
+                  />
+                </IonItem>
+              </>
+            )}
+
+            <div className="mt-8 flex flex-row justify-center">
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline"
+                onClick={handleSubmit}
+              >
+                {loading ? 'Submitting Application' : 'Submit Application'}
+              </button>
+            </div>
+          </form>
+
+          {response && (
+            <IonModal ref={modal} isOpen={response}>
+              <IonContent>
+                <div className="flex flex-col min-h-full items-center justify-center">
+                  <p className="text-gray-50">
+                    Request submitted successfully!
+                  </p>
+
+                  <div className="w-full flex items-center justify-center self-center my-3">
+                    <p className="text-gray-50 text-center block max-w-[300px]">
+                      Your document will be available for pickup/delivery by 1pm{' '}
+                      <strong>02/05/2024</strong>
+                    </p>
+                  </div>
+
+                  <div className="w-full flex items-center justify-center self-center my-3">
+                    <p className="text-gray-50 text-center block max-w-[300px]">
+                      Please do note that a barangay official will be reaching
+                      out to you shortly if need be. Please keep your lines
+                      open.
+                    </p>
+                  </div>
+
+                  <p className="text-gray-50">Thank you!</p>
+
+                  <button
+                    className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline mt-7"
+                    onClick={() => setResponse(false)}
+                  >
+                    Go Back <IonBackButton />
+                  </button>
+                </div>
+              </IonContent>
+            </IonModal>
+          )}
+        </div>
       </IonContent>
     </IonPage>
   );
