@@ -1,16 +1,11 @@
 import {
-  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonHeader,
-  IonMenuButton,
   IonPage,
-  IonText,
-  IonTitle,
-  IonToolbar
+  IonText
 } from '@ionic/react';
 import { useState } from 'react';
 import MainHeader from '../../components/MainHeader';
@@ -34,11 +29,11 @@ function Content({ contents }: ContentProps) {
   };
 
   return (
-    <IonCardContent className="flex flex-col gap-2">
-      {contents.map((content) => (
+    <IonCardContent className="flex flex-col shadow-sm ion-padding">
+      {contents.map((content, i) => (
         <div
           key={content.key}
-          className="p-2 rounded bg-stone-800 text-zinc-300"
+          className={`p-2 my-2 ${i < contents.length - 1 ? 'border-b-2 border-gray-400' : ''}`}
         >
           <IonText>
             {expandedContent === content.key
@@ -47,7 +42,7 @@ function Content({ contents }: ContentProps) {
           </IonText>
           {content.text.length > 100 && (
             <button
-              className="mt-2 text-blue-500 hover:underline"
+              className="mb-4 text-blue-500 hover:underline"
               onClick={() => toggleExpanded(content.key)}
             >
               {expandedContent === content.key ? 'See less' : 'See more...'}
@@ -128,17 +123,21 @@ const Home: React.FC = () => {
       <MainHeader />
 
       <IonContent className="ion-padding" fullscreen>
-        <IonCard>
+        <IonCard className="mb-4">
           <IonCardHeader>
-            <IonCardTitle>Announcements</IonCardTitle>
+            <IonCardTitle>
+              <IonText className="text-xl font-semibold">Announcements</IonText>
+            </IonCardTitle>
           </IonCardHeader>
 
           <Content contents={announcements} />
         </IonCard>
 
-        <IonCard>
+        <IonCard className="mb-4">
           <IonCardHeader>
-            <IonCardTitle>News</IonCardTitle>
+            <IonCardTitle>
+              <IonText className="text-xl font-semibold">News</IonText>
+            </IonCardTitle>
           </IonCardHeader>
 
           <Content contents={news} />
@@ -146,38 +145,38 @@ const Home: React.FC = () => {
 
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Polls</IonCardTitle>
+            <IonCardTitle>
+              <IonText className="text-xl font-semibold">Polls</IonText>
+            </IonCardTitle>
           </IonCardHeader>
 
-          <IonCardContent className="flex flex-col gap-2">
-            {polls.map((poll) => {
+          <IonCardContent className="flex flex-col gap-4 shadow-sm">
+            {polls.map((poll, i) => {
               return (
                 <div
                   key={poll.key}
-                  className="p-2 rounded bg-stone-800 text-zinc-300"
+                  className={`p-2 ${i < polls.length - 1 ? 'border-b-2 border-gray-400' : ''}`}
                 >
-                  <IonText>
-                    <h2>{poll.headline}</h2>
-                    <h3>{poll.date}</h3>
-                  </IonText>
-                  <form className="mt-6">
-                    <div className="flex flex-col gap-8 mb-6 sm:flex-row">
-                      {poll.choices.map((choice, i) => (
-                        <div key={i} className="flex gap-2 items-center">
-                          <input
-                            type="radio"
-                            id={`option-${i}`}
-                            name="poll_option"
-                            value={`option-${i}`}
-                            className="mr-2"
-                          />
-                          <label htmlFor={`option-${i}`}>{choice}</label>
-                        </div>
-                      ))}
-                    </div>
+                  <h2 className="mb-2 text-xl font-bold">{poll.headline}</h2>
+                  <h3 className="mb-4 text-sm">{poll.date}</h3>
+                  <form className="mb-5 space-y-2">
+                    {poll.choices.map((choice, i) => (
+                      <div key={i} className="flex items-center">
+                        <input
+                          type="radio"
+                          id={`option-${i}`}
+                          name="poll_option"
+                          value={`option-${i}`}
+                          className="mr-2 text-blue-500"
+                        />
+                        <label htmlFor={`option-${i}`} className="">
+                          {choice}
+                        </label>
+                      </div>
+                    ))}
                     <button
                       type="submit"
-                      className="py-2 px-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                      className="py-2 px-4 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700"
                     >
                       Vote
                     </button>
@@ -191,5 +190,4 @@ const Home: React.FC = () => {
     </IonPage>
   );
 };
-
 export default Home;
