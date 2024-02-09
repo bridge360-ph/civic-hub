@@ -7,7 +7,6 @@ import {
   IonLabel,
   IonSelect,
   IonSelectOption,
-  IonButton,
   IonInput,
   IonText,
   IonAlert,
@@ -53,7 +52,7 @@ const FormApplication: React.FC = () => {
         setRelationship('');
       }, 3000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -61,7 +60,7 @@ const FormApplication: React.FC = () => {
     <IonPage>
       <MainHeader />
       <IonContent>
-        <h4 className="text-center capitalize text-base mt-10">
+        <h4 className="mt-10 text-base text-center capitalize">
           Application Form
         </h4>
 
@@ -82,7 +81,7 @@ const FormApplication: React.FC = () => {
           />
         )}
 
-        <div className="flex flex-col items-center justify mt-14">
+        <div className="flex flex-col items-center mt-14 justify">
           <form
             onSubmit={(e) => e.preventDefault()}
             className="w-full max-w-md"
@@ -175,10 +174,10 @@ const FormApplication: React.FC = () => {
               </>
             )}
 
-            <div className="mt-8 flex flex-row justify-center">
+            <div className="flex flex-row justify-center mt-8">
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline"
+                className="py-2 px-6 text-sm font-bold text-white bg-blue-500 rounded hover:bg-indigo-700 focus:outline-none focus:shadow-outline"
                 onClick={handleSubmit}
               >
                 {loading ? 'Submitting Application' : 'Submit Application'}
@@ -189,20 +188,20 @@ const FormApplication: React.FC = () => {
           {response && (
             <IonModal ref={modal} isOpen={response}>
               <IonContent>
-                <div className="flex flex-col min-h-full items-center justify-center">
+                <div className="flex flex-col justify-center items-center min-h-full">
                   <p className="text-gray-50">
                     Request submitted successfully!
                   </p>
 
-                  <div className="w-full flex items-center justify-center self-center my-3">
-                    <p className="text-gray-50 text-center block max-w-[300px]">
+                  <div className="flex justify-center items-center self-center my-3 w-full">
+                    <p className="block text-center text-gray-50 max-w-[300px]">
                       Your document will be available for pickup/delivery by 1pm{' '}
                       <strong>02/05/2024</strong>
                     </p>
                   </div>
 
-                  <div className="w-full flex items-center justify-center self-center my-3">
-                    <p className="text-gray-50 text-center block max-w-[300px]">
+                  <div className="flex justify-center items-center self-center my-3 w-full">
+                    <p className="block text-center text-gray-50 max-w-[300px]">
                       Please do note that a barangay official will be reaching
                       out to you shortly if need be. Please keep your lines
                       open.
@@ -212,7 +211,7 @@ const FormApplication: React.FC = () => {
                   <p className="text-gray-50">Thank you!</p>
 
                   <button
-                    className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline mt-7"
+                    className="py-2 px-6 mt-7 text-sm font-bold text-white bg-blue-500 rounded hover:bg-indigo-700 focus:outline-none focus:shadow-outline"
                     onClick={() => setResponse(false)}
                   >
                     Go Back <IonBackButton />

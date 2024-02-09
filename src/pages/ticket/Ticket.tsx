@@ -2,7 +2,6 @@ import {
   IonContent,
   IonPage,
   IonModal,
-  IonButton,
   IonBackButton,
   IonLoading
 } from '@ionic/react';
@@ -43,7 +42,7 @@ const Ticket: React.FC = () => {
         setDescription('');
       }, 3000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -61,22 +60,22 @@ const Ticket: React.FC = () => {
       )}
 
       <IonContent>
-        <h4 className="text-center capitalize text-base mt-10">
+        <h4 className="mt-10 text-base text-center capitalize">
           Submit a ticket
         </h4>
 
         {/* Ticket Form */}
 
-        <div className="flex flex-col items-center justify mt-14">
+        <div className="flex flex-col items-center mt-14 justify">
           <form
             action=""
             onSubmit={(e) => e.preventDefault()}
-            className="w-full max-w-md px-6"
+            className="px-6 w-full max-w-md"
           >
             <div className="mb-4">
               <label
                 htmlFor="type"
-                className="block text-gray-50 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-50"
               >
                 Type:
               </label>
@@ -86,7 +85,7 @@ const Ticket: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                   setTicketType(e.target.value)
                 }
-                className="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-indigo-500 text-xs"
+                className="py-2 px-3 w-full text-xs rounded border border-gray-300 focus:border-indigo-500 focus:outline-none"
                 style={{ width: '100%' }}
                 required
               >
@@ -102,7 +101,7 @@ const Ticket: React.FC = () => {
               <div className="mb-4">
                 <label
                   htmlFor="category"
-                  className="block text-gray-50 text-sm font-bold mb-2"
+                  className="block mb-2 text-sm font-bold text-gray-50"
                 >
                   Category:
                 </label>
@@ -110,7 +109,7 @@ const Ticket: React.FC = () => {
                   id="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-indigo-500 text-xs"
+                  className="py-2 px-3 w-full text-xs rounded border border-gray-300 focus:border-indigo-500 focus:outline-none"
                   style={{ width: '100%' }}
                 >
                   <option value="">Select category...</option>
@@ -126,7 +125,7 @@ const Ticket: React.FC = () => {
             <div className="mb-4">
               <label
                 htmlFor="priority"
-                className="block text-gray-50 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-50"
               >
                 Priority:
               </label>
@@ -134,7 +133,7 @@ const Ticket: React.FC = () => {
                 id="priority"
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
-                className="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-indigo-500 text-xs"
+                className="py-2 px-3 w-full text-xs rounded border border-gray-300 focus:border-indigo-500 focus:outline-none"
                 style={{ width: '100%' }}
               >
                 <option value="low">Low</option>
@@ -146,7 +145,7 @@ const Ticket: React.FC = () => {
             <div className="mb-4">
               <label
                 htmlFor="location"
-                className="block text-gray-50 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-50"
               >
                 Location:
               </label>
@@ -156,14 +155,14 @@ const Ticket: React.FC = () => {
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-indigo-500 text-black text-sm"
+                className="py-2 px-3 w-full text-sm text-black bg-white rounded border border-gray-300 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block text-gray-50 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-50"
               >
                 Description:
               </label>
@@ -172,7 +171,7 @@ const Ticket: React.FC = () => {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-indigo-500 text-black text-sm"
+                className="py-2 px-3 w-full text-sm text-black bg-white rounded border border-gray-300 focus:border-indigo-500 focus:outline-none"
                 placeholder={`${ticket_type === 'complaint' ? 'Enter your complaint...' : ticket_type === 'feedback' ? 'Enter your feedback...' : 'Enter your suggestions...'}`}
               ></textarea>
             </div>
@@ -186,7 +185,7 @@ const Ticket: React.FC = () => {
 
                   handleSubmit();
                 }}
-                className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline"
+                className="py-2 px-6 text-sm font-bold text-white bg-blue-500 rounded hover:bg-indigo-700 focus:outline-none focus:shadow-outline"
                 disabled={loading}
               >
                 {loading ? 'Submitting...' : 'Submit'}
@@ -197,10 +196,10 @@ const Ticket: React.FC = () => {
           {response && (
             <IonModal ref={modal} isOpen={response}>
               <IonContent>
-                <div className="flex flex-col min-h-full items-center justify-center">
+                <div className="flex flex-col justify-center items-center min-h-full">
                   <p className="text-gray-50">Ticket submitted successfully!</p>
-                  <div className="w-full flex items-center justify-center self-center my-3">
-                    <p className="text-gray-50 text-center block max-w-[300px]">
+                  <div className="flex justify-center items-center self-center my-3 w-full">
+                    <p className="block text-center text-gray-50 max-w-[300px]">
                       A barangay official will be reaching out to you shortly if
                       need be. Please keep your lines open.
                     </p>
@@ -208,7 +207,7 @@ const Ticket: React.FC = () => {
                   <p className="text-gray-50">Thank you!</p>
 
                   <button
-                    className="bg-blue-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 text-sm rounded focus:outline-none focus:shadow-outline mt-7"
+                    className="py-2 px-6 mt-7 text-sm font-bold text-white bg-blue-500 rounded hover:bg-indigo-700 focus:outline-none focus:shadow-outline"
                     onClick={() => setResponse(false)}
                   >
                     Go Back <IonBackButton />
