@@ -35,6 +35,7 @@ function Content({ contents }: ContentProps) {
           key={content.key}
           className={`p-2 my-2 ${i < contents.length - 1 ? 'border-b-2 border-gray-400' : ''}`}
         >
+          <IonText className="block font-black">{content.date}</IonText>
           <IonText>
             {expandedContent === content.key
               ? content.text
