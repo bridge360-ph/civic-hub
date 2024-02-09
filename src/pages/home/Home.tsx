@@ -15,15 +15,15 @@ import {
 import { useState } from 'react';
 import MainHeader from '../../components/MainHeader';
 
-type content = {
+type Content = {
   key: number;
   date: string;
   headline: string;
-  content: string;
+  text: string;
 };
 
 interface ContentProps {
-  contents: content[];
+  contents: Content[];
 }
 
 function Content({ contents }: ContentProps) {
@@ -42,11 +42,10 @@ function Content({ contents }: ContentProps) {
         >
           <IonText>
             {expandedContent === content.key
-              ? content.content
-              : `${content.content.slice(0, 100)}...`}
+              ? content.text
+              : `${content.text.slice(0, 100)}...`}
           </IonText>
-          <p>{content.type === 'straw'}</p>
-          {content.content.length > 100 && (
+          {content.text.length > 100 && (
             <button
               className="mt-2 text-blue-500 hover:underline"
               onClick={() => toggleExpanded(content.key)}
@@ -65,22 +64,19 @@ const announcements = [
     key: 1,
     date: new Date().toDateString(),
     headline: 'New Garbage Collection Schedule',
-    content:
-      'Please be advised that starting next week, the Barangay Waste Management Division will implement a new schedule for garbage collection. Kindly refer to the updated schedule posted on our official website or inquire at the Barangay Hall for more details. Thank you for your cooperation.'
+    text: 'Please be advised that starting next week, the Barangay Waste Management Division will implement a new schedule for garbage collection. Kindly refer to the updated schedule posted on our official website or inquire at the Barangay Hall for more details. Thank you for your cooperation.'
   },
   {
     key: 2,
     date: new Date().toDateString(),
     headline: 'Road Repair Notice',
-    content:
-      'To all residents, we would like to inform you that road repairs will commence on [Date]. Please expect temporary road closures and traffic diversions in affected areas. Your understanding and patience during this period are highly appreciated.'
+    text: 'To all residents, we would like to inform you that road repairs will commence on [Date]. Please expect temporary road closures and traffic diversions in affected areas. Your understanding and patience during this period are highly appreciated.'
   },
   {
     key: 3,
     date: new Date().toDateString(),
     headline: 'Community Clean-up Drive',
-    content:
-      "Join us this Saturday for a community clean-up drive! Let's work together to keep our Barangay clean and green. Meeting point will be at the Barangay Hall at 8:00 AM. Don't forget to bring your own cleaning materials and water. See you there!"
+    text: "Join us this Saturday for a community clean-up drive! Let's work together to keep our Barangay clean and green. Meeting point will be at the Barangay Hall at 8:00 AM. Don't forget to bring your own cleaning materials and water. See you there!"
   }
 ];
 
@@ -89,22 +85,19 @@ const news = [
     key: 1,
     date: new Date().toDateString(),
     headline: 'Breaking News: New Health Protocols Implemented',
-    content:
-      "In response to the recent surge in COVID-19 cases, the Barangay Council has implemented new health protocols to ensure the safety of our residents. These protocols include mandatory mask-wearing in public spaces, strict adherence to social distancing measures, and increased sanitation efforts in community areas. Let's all do our part to curb the spread of the virus and protect our community."
+    text: "In response to the recent surge in COVID-19 cases, the Barangay Council has implemented new health protocols to ensure the safety of our residents. These protocols include mandatory mask-wearing in public spaces, strict adherence to social distancing measures, and increased sanitation efforts in community areas. Let's all do our part to curb the spread of the virus and protect our community."
   },
   {
     key: 2,
     date: new Date().toDateString(),
     headline: 'Road Closure Announcement',
-    content:
-      'Please be informed that a portion of Main Street will be temporarily closed for repairs starting tomorrow. The closure will affect the stretch from Barangay Hall to the intersection with Secondary Road. Motorists are advised to take alternative routes during this period. We apologize for any inconvenience caused and thank you for your cooperation.'
+    text: 'Please be informed that a portion of Main Street will be temporarily closed for repairs starting tomorrow. The closure will affect the stretch from Barangay Hall to the intersection with Secondary Road. Motorists are advised to take alternative routes during this period. We apologize for any inconvenience caused and thank you for your cooperation.'
   },
   {
     key: 3,
     date: new Date().toDateString(),
     headline: 'Community Vaccination Drive',
-    content:
-      "Great news, everyone! The Barangay Health Center will be conducting a community vaccination drive next weekend. COVID-19 vaccines will be administered to eligible residents free of charge. Registration will be open starting tomorrow at the Barangay Hall. Let's all take this opportunity to protect ourselves and our loved ones."
+    text: "Great news, everyone! The Barangay Health Center will be conducting a community vaccination drive next weekend. COVID-19 vaccines will be administered to eligible residents free of charge. Registration will be open starting tomorrow at the Barangay Hall. Let's all take this opportunity to protect ourselves and our loved ones."
   }
 ];
 
