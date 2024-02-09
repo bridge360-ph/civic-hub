@@ -6,6 +6,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonMenu,
   IonMenuButton,
@@ -23,6 +24,15 @@ import Ticket from './pages/ticket/Ticket';
 import FormApplication from './pages/form-application/FormApplication';
 
 import './index.css';
+
+// icons
+
+import {
+  homeOutline,
+  documentTextOutline,
+  informationCircleOutline
+} from 'ionicons/icons';
+import SidebarButton from './components/SidebarButton';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,45 +61,30 @@ const App: React.FC = () => (
       <IonMenu contentId="main-content">
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Menu Content</IonTitle>
+            <div className="flex flex-row justify-center items-center min-h-[55px]">
+              <IonTitle>Menu</IonTitle>
+            </div>
           </IonToolbar>
         </IonHeader>
+
+        {/* Sidebar Buttons */}
+
         <IonContent className="ion-padding">
-          <IonMenuToggle autoHide={false}>
-            <IonButton
-              expand="block"
-              routerLink="/home"
-              size="small"
-              fill="clear"
-              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
-            >
-              Home
-            </IonButton>
-          </IonMenuToggle>
-          <IonMenuToggle autoHide={false}>
-            <IonButton
-              expand="block"
-              routerLink="/ticket"
-              size="small"
-              fill="clear"
-              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
-            >
-              Submit a ticket
-            </IonButton>
-          </IonMenuToggle>
-          <IonMenuToggle autoHide={false}>
-            <IonButton
-              expand="block"
-              routerLink="/forms"
-              size="small"
-              fill="clear"
-              style={{ borderBottom: '1px solid #555', padding: '5px 0' }}
-            >
-              Forms
-            </IonButton>
-          </IonMenuToggle>
+          <SidebarButton routerLink="/home" icon={homeOutline} text="Home" />
+          <SidebarButton
+            routerLink="/ticket"
+            icon={informationCircleOutline}
+            text="Submit a ticket"
+          />
+          <SidebarButton
+            routerLink="/forms"
+            icon={documentTextOutline}
+            text="Forms"
+          />
         </IonContent>
       </IonMenu>
+
+      {/* Pages */}
 
       <IonPage id="main-content">
         <IonContent>
