@@ -20,14 +20,14 @@ const MainHeader = () => {
             Civic Hub — Brgy. Marites
           </IonTitle>
 
-          <div className="w-11 h-8 rounded-full overflow-hidden pr-3">
+          <IonAvatar className="overflow-hidden pr-3 w-11 h-8 rounded-full">
             <img
               alt="Silhouette of a person's head"
               src="https://ionicframework.com/docs/img/demos/avatar.svg"
               className="block object-cover w-full h-full"
               style={{ borderRadius: '50%' }}
             />
-          </div>
+          </IonAvatar>
         </div>
       </IonToolbar>
     </IonHeader>
